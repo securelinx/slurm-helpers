@@ -1,0 +1,12 @@
+#!/bin/bash
+sacct=`which sacct`
+if [ $? -ne 0 ]; then
+  sacct=/usr/bin/sacct
+fi
+OPTS=""
+if [ -n "$1" ]; then
+  OPTS="-j $1"
+fi
+echo JOB usage over time 
+$sacct -X  -oJ%10,User%15,account%15,Elapsed,CPUTime,CPUTimeRAW $OPTS  --starttime 2022-01-01
+
